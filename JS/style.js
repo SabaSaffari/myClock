@@ -1,4 +1,6 @@
 
+var setTime = "";
+
  function showTime(){
      var date = new Date();
      var h = date.getHours();
@@ -13,6 +15,9 @@
            h = h -12;
            session = "PM!";
        }
+       if(h == setTime){
+        console.log("time is over");
+       }
         h = (h < 10) ? "0" + h : h;
         m = (m < 10) ? "0" + m : m;
         s = (s < 10) ? "0" + s : s;
@@ -21,12 +26,23 @@
 
      document.getElementById('myClock').innerHTML = time;
 
-       var myTime1 = 10 + " : " + 0 + " : " + 0 + " " + "PM";
-       var myTime2 = 10 + " : " + 30 + " : " + 0 + " " + "PM";
-     if(time < myTime2 && time > myTime1){
-        console.log('saba');
-     };
-     
+      for(var i = 0; i < 23; i++){
+        var option = document.createElement('option');
+        option.value = i;
+        option.text = i;
+         document.getElementById('select').appendChild(option);
+      };
+      var selectTime = document.getElementById('select');
+      selectTime.addEventListener("change", function(ev){
+          
+          setTime = ev.target.value;
+         console.log(setTime);
+    
+      });
+
+      document.getElementById('changeColor').addEventListener('click', function(){
+        this.style.backgroundColor = "red";
+       });     
  };
  showTime();
  setInterval(showTime, 1000);
